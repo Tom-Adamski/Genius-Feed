@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Search</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/search.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="input-group">
+        <input id="name" type="text" class="form-control" placeholder="Nom de l'artiste" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <button class="btn btn-outline-secondary" type="button" onclick="search();">Rechercher</button>
+</div>
+
+<div class="row" id="list-container">
+    
+<div class="col-sm-12">Result</div>
+
+</div>
+
+
+</div>
+    
+</body>
+</html>
