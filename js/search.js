@@ -24,7 +24,7 @@ function search(){
 function display(){
     $("#list-container").empty();
 
-    var artists = {};
+    var artists = [];
 
     for(var i in resultJson.response.hits){
         
@@ -34,8 +34,20 @@ function display(){
             image_url: resultJson.response.hits[i].result.primary_artist.image_url
         };
 
-        artists[i] = artist;
+        var unique = true;
+
+        for(var j in artists){
+            if(artist.id == artists[j].id){
+                unique = false;
+                break;
+            }
+        }
+
+        if(unique)
+            artists.push(artist);
+
     }
+
 
 
     for(var i in artists){
