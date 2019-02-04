@@ -24,7 +24,39 @@ function search(){
 function display(){
     $("#list-container").empty();
 
-    var name = resultJson.response.hits[0].result.primary_artist.name;
+    var artists = {};
 
-    $("#list-container").append('<div class="col-sm-12">'+name+'</div>')
+    for(var i in resultJson.response.hits){
+        
+        var artist = {
+            name: resultJson.response.hits[i].result.primary_artist.name,
+            id: resultJson.response.hits[i].result.primary_artist.id,
+            image_url: resultJson.response.hits[i].result.primary_artist.image_url
+        };
+
+        artists[i] = artist;
+    }
+
+
+    for(var i in artists){
+
+        var image = $('<div/>', {class: 'col-sm-2 nopadding' })
+                .append($('<img/>',{class: 'img-fluid', src:artists[i].image_url, }));
+        var artistField = $('<div/>', {class: 'col-sm-8' })
+                .append(artists[i].name);
+        var subButton = $('<div/>',{class: 'col-sm-2 nopadding'})
+                .append($('<button/>',{class: 'btn btn-secondary', type: 'button'}).append("Subscribe"));
+
+
+        var cell = $('<div/>', {class: 'col-sm-6' }).append($('<div/>',{class: 'row border'}));
+
+        cell.find(".row").append(image);
+        cell.find(".row").append(artistField);
+        cell.find(".row").append(subButton);
+
+        $("#list-container").append(cell);
+        
+    }
+
+    
 }
