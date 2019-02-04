@@ -21,9 +21,7 @@ function search(){
 
 }
 
-function display(){
-    $("#list-container").empty();
-
+function createArtistsArray(){
     var artists = [];
 
     for(var i in resultJson.response.hits){
@@ -35,7 +33,6 @@ function display(){
         };
 
         var unique = true;
-
         for(var j in artists){
             if(artist.id == artists[j].id){
                 unique = false;
@@ -45,20 +42,30 @@ function display(){
 
         if(unique)
             artists.push(artist);
-
     }
+    return artists;
+}
+
+function display(){
+    $("#list-container").empty();
+
+    var artists = createArtistsArray();
 
 
-
+    // Création de chaque encart d'artiste
     for(var i in artists){
 
-        var image = $('<div/>', {class: 'col-sm-2 nopadding' })
-                .append($('<img/>',{class: 'img-fluid', src:artists[i].image_url, }));
-        var artistField = $('<div/>', {class: 'col-sm-8' })
-                .append(artists[i].name);
-        var subButton = $('<div/>',{class: 'col-sm-2 nopadding'})
-                .append($('<button/>',{class: 'btn btn-secondary', type: 'button'}).append("Subscribe"));
+        var id = artists[i].id, name = artists[i].name, url = artists[i].image_url
 
+        var image = $('<div/>', {class: 'col-sm-2 nopadding' })
+                .append($('<img/>',{class: 'img-fluid', src:url, }));
+        var artistField = $('<div/>', {class: 'col-sm-8' })
+                .append(name);
+        var subButton = $('<div/>',{class: 'col-sm-2 nopadding'})
+                .append($('<button/>',{class: 'btn btn-secondary', type: 'button', id:id}).append("Subscribe"));
+
+
+        subButton.find('button').attr('onclick','subscribe('+id+',"'+name+'","'+url+'");');
 
         var cell = $('<div/>', {class: 'col-sm-6' }).append($('<div/>',{class: 'row border'}));
 
@@ -71,4 +78,15 @@ function display(){
     }
 
     
+}
+
+function subscribe(id, name, url){
+    $.ajax({
+        method: "POST",
+        url: 'php/subscribe.php',
+        data: { id: id, name: name, image_url: url}
+      })
+        .done(function( data ) {
+          //todo display success
+    });
 }
