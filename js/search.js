@@ -62,8 +62,7 @@ function display(){
         var artistField = $('<div/>', {class: 'col-sm-8' })
                 .append(name);
         var subButton = $('<div/>',{class: 'col-sm-2 nopadding'})
-                .append($('<button/>',{class: 'btn btn-secondary', type: 'button', id:id}).append("Subscribe"));
-
+                .append($('<button/>',{class: 'btn btn-light', type: 'button', id:id}).append('<i class="far fa-plus-square"></i>'));
 
         subButton.find('button').attr('onclick','subscribe('+id+',"'+name+'","'+url+'");');
 
