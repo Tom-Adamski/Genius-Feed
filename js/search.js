@@ -1,13 +1,8 @@
-var nameQuery;
-
 var searchUrl = "https://api.genius.com/search?access_token=S0vCfM0Pfq1zQbUqiyqb82d9XlT3Nzf0pDea6f_IlZm3FF596UR2RQ4__dEm-Y-b";
-
-var resultJson;
-
 
 function search(){
 
-    nameQuery = $("#name").val();
+    var nameQuery = $("#name").val();
 
     $.ajax({
         method: "GET",
@@ -15,13 +10,13 @@ function search(){
         data: { q: nameQuery}
       })
         .done(function( data ) {
-          resultJson = data;
-          display();
+            var resultJson = data;
+          display(resultJson);
     });
 
 }
 
-function createArtistsArray(){
+function createArtistsArray(resultJson){
     var artists = [];
 
     for(var i in resultJson.response.hits){
@@ -46,10 +41,10 @@ function createArtistsArray(){
     return artists;
 }
 
-function display(){
+function display(resultJson){
     $("#list-container").empty();
 
-    var artists = createArtistsArray();
+    var artists = createArtistsArray(resultJson);
 
 
     // Création de chaque encart d'artiste
