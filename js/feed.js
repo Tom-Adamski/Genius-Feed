@@ -118,13 +118,15 @@ function displaySongs(){
             var contentField = $('<div/>', {class: 'col-sm-10' });
 
             var titleField = $('<div/>', {class: 'row' }).append("Titre : "+title);
-            var artistField = $('<div/>', {class: 'row' }).append("Artiste : "+artist_name);
-            if(feat_name != null)
-                var featField = $('<div/>', {class: 'row' }).append("Featuring : "+feat_name);
+            var artistField = $('<div/>', {class: 'row' }).append("Artiste : "+artist_name); 
             var dateField = $('<div/>', {class: 'row' }).append("Sortie : "+release_date);
 
-            contentField.append(titleField).append(artistField).append(featField).append(dateField);
-        
+            contentField.append(titleField).append(artistField).append(dateField);
+            
+            if(feat_name != null){
+                var featField = $('<div/>', {class: 'row' }).append("Featuring : "+feat_name);
+                contentField.append(featField)
+            }
             
             row.append(image);
             row.append(contentField);
