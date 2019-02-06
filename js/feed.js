@@ -40,19 +40,23 @@ function fetchSongs(artists){
     songs = [];
     // Pour chaque artiste
     for(var i in artists){
+        (function (i) {
+            loadingCount++; //permet d'afficher seulement une fois que tous les artistes ont leur chanson chargée
+            var featName = artists[i]['name'];
 
-        loadingCount++; //permet d'afficher seulement une fois que tous les artistes ont leur chanson chargée
-        $.ajax({
-            method: "GET",
-            crossDomain:true,
-            url: artistsUrl + artists[i]['id'] + songsSuffix,
-            data: { page: "1", sort:"release_date", per_page:"1", access_token:accessToken}
-          })
-            .done(function(json) {
-                // when executing AJAX the iterator is already at the end, sending the wrong feat name
-                console.log(artists[i]['name']);
-                addToSongsArray(json, artists[i]['name']);
-        });     
+            $.ajax({
+                method: "GET",
+                crossDomain:true,
+                url: artistsUrl + artists[i]['id'] + songsSuffix,
+                data: { page: "1", sort:"release_date", per_page:"1", access_token:accessToken}
+            })
+                .done(function(json) {
+                    // when executing AJAX the iterator is already at the end, sending the wrong feat name
+                    //console.log(artists[i]['name']);
+                    console.log(featName);
+                    addToSongsArray(json, featName);
+            });    
+        })(i); 
     }
 }
 
@@ -90,9 +94,6 @@ function getDateAddToArray(song){
             displaySongs();
     }); 
 }
-
-
-
 
 function displaySongs(){
     if(loadingCount == 0){ // toutes les chansons ont été chargées
