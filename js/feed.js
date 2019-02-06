@@ -82,10 +82,34 @@ function addToSongsArray(json){
     }
 }
 
-function displaySongs(songs){
+function displaySongs(){
     if(loadingCount == 0){ // toutes les chansons ont été chargées
         $("#list-container").empty();
         console.log("Start displaying");
+        console.log(songs);
+        // Création de chaque encart de chansons
+        for(var i in songs){
+            //song container
+            var cell = $('<div/>', {class: 'col-sm-6' }).append($('<div/>',{class: 'row border center-items'}));
+
+            //content values
+            var id = songs[i]['id'], title = songs[i]['title'], url = songs[i]['image_url'];
+
+            //content fields
+            var image = $('<div/>', {class: 'col-sm-2 nopadding' })
+                    .append($('<img/>',{class: 'img-fluid', src:url, }));
+            var titleField = $('<div/>', {class: 'col-sm-8' })
+                    .append(title);
+        
+            
+            cell.find(".row").append(image);
+            cell.find(".row").append(titleField);
+        
+            $("#list-container").append(cell);
+        
+        }
+
+
 
     }
 }
