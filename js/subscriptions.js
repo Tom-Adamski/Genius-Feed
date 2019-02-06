@@ -1,6 +1,4 @@
-var foo;
-
-function load(){
+function loadAndDisplay(){
     $.ajax({
         method: "POST",
         url: 'php/getsubscriptions.php',
@@ -8,7 +6,8 @@ function load(){
       })
         .done(function( data ) {
           var resultJson = JSON.parse(data);
-          display(resultJson);
+          var artists = createArtistsArray(resultJson);
+          display(artists);
     });
 }
 
@@ -22,15 +21,11 @@ function createArtistsArray(resultJson){
         };
         artists.push(artist);
     }
-    foo = artists;
     return artists;
 }
 
-function display(resultJson){
+function display(artists){
     $("#list-container").empty();
-
-    var artists = createArtistsArray(resultJson);
-
 
     // Création de chaque encart d'artiste
     for(var i in artists){
