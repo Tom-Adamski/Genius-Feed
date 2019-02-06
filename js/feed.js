@@ -52,8 +52,6 @@ function fetchSongs(artists){
             })
                 .done(function(json) {
                     // when executing AJAX the iterator is already at the end, sending the wrong feat name
-                    //console.log(artists[i]['name']);
-                    console.log(featName);
                     addToSongsArray(json, featName);
             });    
         })(i); 
@@ -119,10 +117,11 @@ function displaySongs(){
                     .append($('<img/>',{class: 'img-fluid', src:url, }));
             var contentField = $('<div/>', {class: 'col-sm-10' });
 
-            var titleField = $('<div/>', {class: 'row' }).append(title);
-            var artistField = $('<div/>', {class: 'row' }).append(artist_name);
-            var featField = $('<div/>', {class: 'row' }).append(feat_name);
-            var dateField = $('<div/>', {class: 'row' }).append(release_date);
+            var titleField = $('<div/>', {class: 'row' }).append("Titre : "+title);
+            var artistField = $('<div/>', {class: 'row' }).append("Artiste : "+artist_name);
+            if(feat_name != null)
+                var featField = $('<div/>', {class: 'row' }).append("Featuring : "+feat_name);
+            var dateField = $('<div/>', {class: 'row' }).append("Sortie : "+release_date);
 
             contentField.append(titleField).append(artistField).append(featField).append(dateField);
         
