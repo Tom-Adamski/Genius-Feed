@@ -2,3 +2,8 @@
     padding: 0 !important;
     margin: 0 !important;
  }
+
+ .center-items{
+    display: flex;
+    align-items: center;
+ }
