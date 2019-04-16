@@ -67,11 +67,13 @@ function getDateAddToArray(song){
       })
         .done(function( json ) {
             song['release_date'] = json['response']['song']['release_date'];
+            console.log('Titre '+song['title']+' date '+song['release_date']);
 
             db.songs.put({
                 id: song['id'],
                 title: song['title'],
                 artist_name: song['artist_name'],
+                release_date: song['release_date'],
                 image_url: song['image_url'],
                 feat_name: song['feat_name']
             });
@@ -88,14 +90,18 @@ function displaySongs(songs){
     // Création de chaque encart de chansons
     for(var i in songs){
 
+        console.log(songs[i]);
+
         //song container
         var row = $('<div/>', {class: 'row border center-items' });
 
         //content values
         var id = songs[i]['id'], 
             title = songs[i]['title'], 
-            url = songs[i]['image_url'], release_date = songs[i]['release_date']
-            artist_name = songs[i]['artist_name'], feat_name = null;
+            url = songs[i]['image_url'], 
+            release_date = songs[i]['release_date']
+            artist_name = songs[i]['artist_name'], 
+            feat_name = null;
 
         if(songs[i]['feat_name'] != null)
             feat_name = songs[i]['feat_name'];
