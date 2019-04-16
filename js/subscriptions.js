@@ -1,14 +1,5 @@
 function loadAndDisplay(){
-    $.ajax({
-        method: "POST",
-        url: 'php/getsubscriptions.php',
-        data: {}
-      })
-        .done(function( data ) {
-          var resultJson = JSON.parse(data);
-          var artists = createArtistsArray(resultJson);
-          display(artists);
-    });
+    db.artists.toArray(array => display(array));
 }
 
 function createArtistsArray(resultJson){
@@ -25,6 +16,7 @@ function createArtistsArray(resultJson){
 }
 
 function display(artists){
+    console.log('cool');
     $("#list-container").empty();
 
     // Création de chaque encart d'artiste

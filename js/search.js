@@ -79,13 +79,11 @@ function display(resultJson){
     
 }
 
+//TODO
 function subscribe(id, name, url){
-    $.ajax({
-        method: "POST",
-        url: 'php/subscribe.php',
-        data: { id: id, name: name, image_url: url}
-      })
-        .done(function( data ) {
-          //todo display success
-    });
+    db.artists.add({
+        id: id,
+        name: name,
+        image_url: url
+	});
 }
