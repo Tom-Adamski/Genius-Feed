@@ -9,17 +9,7 @@ var songs = [];
 
 
 function loadFetchDisplay(){
-    //load artists
-    $.ajax({
-        method: "POST",
-        url: 'php/getsubscriptions.php',
-        data: {}
-      })
-        .done(function( data ) {
-            var resultJson = JSON.parse(data);
-            var artists = createArtistsArray(resultJson);
-            fetchSongs(artists);
-    });
+    db.artists.toArray(array => fetchSongs(array));
 }
 
 function createArtistsArray(resultJson){
