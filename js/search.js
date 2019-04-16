@@ -79,9 +79,8 @@ function display(resultJson){
     
 }
 
-//TODO
 function subscribe(id, name, url){
-    db.artists.add({
+    db.artists.put({
         id: id,
         name: name,
         image_url: url

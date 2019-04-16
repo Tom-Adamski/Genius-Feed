@@ -16,7 +16,6 @@ function createArtistsArray(resultJson){
 }
 
 function display(artists){
-    console.log('cool');
     $("#list-container").empty();
 
     // Création de chaque encart d'artiste
