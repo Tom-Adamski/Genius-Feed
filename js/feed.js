@@ -67,7 +67,6 @@ function getDateAddToArray(song){
       })
         .done(function( json ) {
             song['release_date'] = json['response']['song']['release_date'];
-            console.log('Titre '+song['title']+' date '+song['release_date']);
 
             db.songs.put({
                 id: song['id'],
@@ -82,15 +81,14 @@ function getDateAddToArray(song){
 }
 
 function display(){
-    db.songs.toArray(array => displaySongs(array));
+    db.songs.where('release_date').belowOrEqual(new Date().toISOString().split('T')[0]).
+            toArray(array => displaySongs(array));
 }
 
 function displaySongs(songs){
     $("#list-container").empty();
     // Création de chaque encart de chansons
     for(var i in songs){
-
-        console.log(songs[i]);
 
         //song container
         var row = $('<div/>', {class: 'row border center-items' });
