@@ -128,7 +128,3 @@ function displaySongs(songs){
     
     }
 }
-
-function flush(){
-    db.songs.clear();
-}
